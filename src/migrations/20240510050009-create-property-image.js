@@ -9,8 +9,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      propertyId: {
-        type: Sequelize.INTEGER
+      propertyCode: {
+        type: Sequelize.STRING
       },
       image: {
         type: Sequelize.STRING

@@ -1,7 +1,8 @@
 const {Property_owner} = require('../models');
 const {hash, compare} = require("bcrypt");
-const property = require('../models/property');
+const {Property, Property_image} = require('../models');
 const { where } = require('sequelize');
+const {generateIds} = require("../middlewares/functions");
 
 class PropertyOwnerServices {
     async registerPropertyOwner(data) {
@@ -52,7 +53,10 @@ class PropertyOwnerServices {
 
     async addProperty(data) {
         try {
+            const id = generateIds("PROP")
+
             const property = {
+                propertyCode: id,
                 type : data.type,
                 roomDetails: data.roomDetails,
                 price: data.price,
@@ -60,6 +64,29 @@ class PropertyOwnerServices {
                 location : data.location,
                 propertyOwnerId: data.propertyOwnerId
             }
+
+            let imageList = [];
+
+            for (let i = 0; i < data.images.length; i++) {
+                imageList.push({
+                    propertyCode: id,
+                    image: data.images[i].path
+                })
+            }
+
+            const newProperty = await Property.create(property).then((property) => {
+                return property;
+            }).catch((error) => {
+                return null;
+            });
+
+            const newImages = await Property_image.bulkCreate(imageList).then((images) => {
+                return images;
+            }).catch((error) => {
+                return null;
+            });
+
+            return newProperty && newImages;
         }catch (error) {
             throw new Error(error.message);
         }

@@ -12,14 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
         Property_image.belongsTo(models.Property, {
-            foreignKey: 'propertyId',
+            foreignKey: 'propertyCode',
             as: 'property',
             onDelete: 'CASCADE'
         });
     }
   }
   Property_image.init({
-    propertyId: DataTypes.INTEGER,
+    propertyCode: DataTypes.INTEGER,
     image: DataTypes.STRING
   }, {
     sequelize,

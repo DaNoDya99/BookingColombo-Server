@@ -18,13 +18,14 @@ module.exports = (sequelize, DataTypes) => {
        );
 
          Property.hasMany(models.Property_image, {
-             foreignKey: 'propertyId',
+             foreignKey: 'propertyCode',
                 as: 'propertyImages',
                 onDelete: 'CASCADE'
             });
     }
   }
   Property.init({
+    propertyCode: DataTypes.STRING,
     type: DataTypes.STRING,
     roomDetails: DataTypes.STRING,
     price: DataTypes.STRING,
