@@ -62,7 +62,9 @@ class TravellerServices {
     } catch (error) {
         throw new Error(error)
     }
-}
+  }
+
+  
 }
 
 module.exports = new TravellerServices();
