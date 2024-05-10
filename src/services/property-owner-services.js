@@ -51,28 +51,18 @@ class PropertyOwnerServices {
     }
 
     async addProperty(data) {
-        const propertyID = await property.findOne({where: {id: data.id}}).then((propertyID) => {
-            return propertyID;
-        }).catch((error) => {
-            return null
-        })
-
-        if(propertyID) {
-            throw new Error("Property already exist!");
-        }
-
-        return await property.create({
-            Type: data.Type,
-            RoomDetails: data.RoomDetails,
-            price: data.price,
-            FacilityDetails: data.FacilityDetails,
-            Image: data.Image,
-            Location: data.Location,
-        }).then((newProperty) => {
-            return newProperty;
-        }).catch((error) => {
+        try {
+            const property = {
+                type : data.type,
+                roomDetails: data.roomDetails,
+                price: data.price,
+                facilityDetails: data.facilityDetails,
+                location : data.location,
+                propertyOwnerId: data.propertyOwnerId
+            }
+        }catch (error) {
             throw new Error(error.message);
-        });
+        }
     }
 }
 

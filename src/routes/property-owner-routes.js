@@ -4,5 +4,6 @@ const propertyOwnerController = require('../controllers/property-owner-controlle
 
 router.post('/register-property-owner', propertyOwnerController.registerPropertyOwner);
 router.post('/login-property-owner', propertyOwnerController.loginPropertyOwner);
+router.post('/add-property', propertyOwnerController.addProperty);
 
 module.exports = router;

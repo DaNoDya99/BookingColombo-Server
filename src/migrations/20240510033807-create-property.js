@@ -2,42 +2,38 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('properties', {
+    await queryInterface.createTable('Properties', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Type: {
+      type: {
         type: Sequelize.STRING
       },
-      RoomDetails: {
+      roomDetails: {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.NUMERIC
-      },
-      FacilityDetails: {
         type: Sequelize.STRING
       },
-      Images: {
-        type: Sequelize.BLOB
-      },
-      Location: {
+      facilityDetails: {
         type: Sequelize.STRING
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      location: {
+        type: Sequelize.STRING
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      propertyAddedDate: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
+      propertyOwnerId: {
+          type: Sequelize.INTEGER,
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('properties');
+    await queryInterface.dropTable('Properties');
   }
 };

@@ -26,6 +26,7 @@ class PropertyOwnerController{
     async addProperty(req, res) {
         try{
             const data = req.body;
+            data.images = req.files
             const createdProperty = await propertyOwnerService.addProperty(data);
 
             return res.status(201).json({status: "success", message: "Property added successfully", data: createdProperty});

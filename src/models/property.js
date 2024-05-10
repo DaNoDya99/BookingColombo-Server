@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class property extends Model {
+  class Property extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,18 +11,30 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+       Property.belongsTo(models.Property_owner, {
+          foreignKey: 'propertyOwnerId',
+          onDelete: 'CASCADE'}
+       );
+
+         Property.hasMany(models.Property_image, {
+             foreignKey: 'propertyId',
+                as: 'propertyImages',
+                onDelete: 'CASCADE'
+            });
     }
   }
-  property.init({
-    Type: DataTypes.STRING,
-    RoomDetails: DataTypes.STRING,
-    price: DataTypes.NUMERIC,
-    FacilityDetails: DataTypes.STRING,
-    Images: DataTypes.BLOB,
-    Location: DataTypes.STRING
+  Property.init({
+    type: DataTypes.STRING,
+    roomDetails: DataTypes.STRING,
+    price: DataTypes.STRING,
+    facilityDetails: DataTypes.STRING,
+    location: DataTypes.STRING,
+    propertyOwnerId: DataTypes.INTEGER,
   }, {
     sequelize,
-    modelName: 'property',
+    modelName: 'Property',
+    timestamps: false
   });
-  return property;
+  return Property;
 };
