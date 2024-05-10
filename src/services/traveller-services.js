@@ -54,6 +54,15 @@ class TravellerServices {
   async sayHello() {
     return 'Hello Traveller!';
   }
+
+  async getTraveller(id) {
+    try{
+        const traveller = Traveller.findOne({where: {id: id}});
+        return traveller
+    } catch (error) {
+        throw new Error(error)
+    }
+}
 }
 
 module.exports = new TravellerServices();

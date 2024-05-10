@@ -25,6 +25,16 @@ class TravellerController {
   async sayHello(req, res) {
     res.status(200).json({ message: await TravellerService.sayHello() });
   }
+
+  async getTraveller(req, res) {
+    try{
+        const id = req.body.params;
+        const traveller = TravellerService.getTraveller(id);
+        return res.status(200).json({status: "success", message: "Traveller found", data: traveller});
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
+}
 }
 
 module.exports = new TravellerController();

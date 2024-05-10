@@ -91,6 +91,15 @@ class PropertyOwnerServices {
             throw new Error(error.message);
         }
     }
+
+    async getPropertyOwner(id) {
+        try{
+            const propertyOwner = Property_owner.findOne(({where: {id: id}}));
+            return propertyOwner
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
 }
 
 module.exports = new PropertyOwnerServices();
