@@ -27,7 +27,6 @@ class PropertyOwnerController{
         try{
             const data = req.body;
             data.images = req.files
-            console.log(data);
             const createdProperty = await propertyOwnerService.addProperty(data);
             if(!createdProperty){
                 return res.status(500).json({status: "error", message: "An error occurred"});
