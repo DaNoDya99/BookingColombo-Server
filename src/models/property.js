@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
           onDelete: 'CASCADE'}
        );
 
+       Property.hasMany(models.Wishlist, {
+        foreignKey: 'propertyCode',
+        onDelete: 'CASCADE'
+       });
+
          Property.hasMany(models.Property_image, {
              foreignKey: 'propertyCode',
                 as: 'propertyImages',
