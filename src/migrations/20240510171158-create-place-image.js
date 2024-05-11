@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       placeCode: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       image: {
         type: Sequelize.STRING

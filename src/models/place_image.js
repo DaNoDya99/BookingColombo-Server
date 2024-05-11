@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Place_image.init({
-    placeCode: DataTypes.INTEGER,
+    placeCode: DataTypes.STRING,
     image: DataTypes.STRING
   }, {
     sequelize,
