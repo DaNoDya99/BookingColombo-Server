@@ -5,6 +5,7 @@ const propertyRoutes = require('./property-routes');
 const adminRoutes = require('./admin-routes');
 const reviewRoutes = require('./review-routes');
 const bookingRoutes = require('./booking-routes');
+const reportsRoutes = require('./reports-routes');
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use('/property', propertyRoutes);
 router.use('/admin', adminRoutes);
 router.use('/reviews', reviewRoutes);
 router.use('/bookings', bookingRoutes);
+router.use('/reports', reportsRoutes);
 
 module.exports = router;
