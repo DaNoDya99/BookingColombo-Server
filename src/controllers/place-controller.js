@@ -19,8 +19,10 @@ class PlaceController {
     async getPlaces(req, res) {
         try {
             const id = req.params.id;
-            const properties = await placeServices.getPlace(id);
-            return res.status(200).json({status: "success", message: "All places", data: properties});
+            console.log(id);
+            const place = await placeServices.getPlace(id);
+            console.log("b",place);
+            return res.status(200).json({status: "success", message: "Place found", data: place});
         } catch (error) {
             return res.status(500).json({error: error.message})
         }
