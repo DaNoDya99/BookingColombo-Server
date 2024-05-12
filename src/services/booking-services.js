@@ -4,13 +4,20 @@ const {Op, where} = require("sequelize");
 class BookingServices{
     async addBooking(booking){
         try{
-            const bookingExists = await Bookings.findAll({
-                arrival_date : {
-                    [Op.between] : [booking.arrival_date, booking.departure_date]
-                },
-                departure_date : {
-                    [Op.between] : [booking.arrival_date, booking.departure_date]
-                },
+            const bookingExists = await Bookings.findAll({ where : {
+                    [Op.or] : [
+                        {
+                            arrival_date : {
+                                [Op.between] : [booking.arrival_date, booking.departure_date]
+                            }
+                        },
+                        {
+                            departure_date : {
+                                [Op.between] : [booking.arrival_date, booking.departure_date]
+                            }
+                        }
+                    ]
+                }
             })
 
             if(bookingExists.length > 0){
