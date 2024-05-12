@@ -19,10 +19,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       arrival_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       departure_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       noOfPeople: {
         type: Sequelize.INTEGER

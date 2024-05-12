@@ -36,6 +36,28 @@ class BookingServices{
             throw new Error(e.message);
         }
     }
+
+    async getBookingsByArrivalDate(arrival_date){
+        try{
+            return await Bookings.findAll({
+                where : {
+                    arrival_date : {
+                        [Op.lte] : arrival_date
+                    },
+                    departure_date : {
+                        [Op.gte]: arrival_date
+                    }
+                },
+
+            }).then((bookings) => {
+                return bookings;
+            }).catch((error) => {
+                throw new Error(error.message);
+            });
+        }catch (e){
+            throw new Error(e.message);
+        }
+    }
 }
 
 module.exports = new BookingServices();

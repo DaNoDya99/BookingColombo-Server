@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     phone: DataTypes.STRING,
-    arrival_date: DataTypes.DATE,
-    departure_date: DataTypes.DATE,
+    arrival_date: DataTypes.DATEONLY,
+    departure_date: DataTypes.DATEONLY,
     noOfPeople: DataTypes.INTEGER,
     propertyCode: DataTypes.STRING,
     travellerID: DataTypes.INTEGER

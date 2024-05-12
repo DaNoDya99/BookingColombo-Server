@@ -14,6 +14,20 @@ class BookingController{
             res.status(500).json(e.message);
         }
     }
+
+    async getBookingsByArrivalDate(req, res){
+        try{
+            const arrival_date = req.params.arrival_date;
+            const bookings = await BookingService.getBookingsByArrivalDate(arrival_date);
+            if(bookings){
+                res.status(200).json({ status: "success", message: "Bookings fetched successfully", bookings: bookings});
+            }else{
+                res.status(500).json({ status: "success", message: "An error occurred", bookings: []})
+            }
+        }catch (e){
+            res.status(500).json(e.message);
+        }
+    }
 }
 
 module.exports = new BookingController();
