@@ -18,14 +18,9 @@ module.exports = {
       review: {
         type: Sequelize.STRING
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+        rating: {
+            type: Sequelize.INTEGER
+        }
     });
   },
   async down(queryInterface, Sequelize) {
