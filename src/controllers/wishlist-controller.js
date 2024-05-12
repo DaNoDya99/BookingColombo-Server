@@ -20,6 +20,16 @@ class WishlistController {
             return res.status(500).json({error: error.message})
         }
     }
+
+    async getWishlistByTravellerID(req, res) {
+        try{
+            const id = req.params;
+            const wishlist = await wishlistServices.getWishlistByTravellerID(id.id);
+            return res.status(200).json({status: "success", message: "wishlist found", data: wishlist});
+        } catch (error) {
+            return res.status(500).json({error: error.message})
+        }
+    }
 }
 
 module.exports = new WishlistController();

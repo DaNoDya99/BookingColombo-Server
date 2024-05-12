@@ -10,5 +10,6 @@ router.route('/login-traveller').post(TravellerController.loginTraveller);
 router.route('/get-traveller/:id').get(TravellerController.getTraveller);
 router.post('/add-to-wishlist', wishlistController.addToWishlist);
 router.route('/get-wishlist/:id').get(wishlistController.getWishlist);
+router.route('/get-wishlist-by-traveller/:id').get(wishlistController.getWishlistByTravellerID);
 
 module.exports = router;
