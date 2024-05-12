@@ -1,5 +1,5 @@
-const {Bookings} = require('../models');
-const {Op} = require("sequelize");
+const {Bookings, Property, Property_image} = require('../models');
+const {Op, where} = require("sequelize");
 
 class BookingServices{
     async addBooking(booking){
@@ -54,6 +54,62 @@ class BookingServices{
             }).catch((error) => {
                 throw new Error(error.message);
             });
+        }catch (e){
+            throw new Error(e.message);
+        }
+    }
+
+    async deleteBooking(id) {
+        try {
+            const booking = await Bookings.findOne({
+                where: {
+                    id: id
+                }
+            });
+
+            if (!booking) {
+                throw new Error("Booking not found");
+            }
+
+            await Bookings.destroy({
+                where: {
+                    id: id
+                }
+            });
+
+            return booking;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    async getBookingsByID(id){
+        try{
+            const bookings = await Bookings.findAll();
+            if(bookings) {
+                for(let booking in bookings) {
+                    const images = await Property_image.findAll({
+                        where : {propertyCode: bookings[booking].dataValues.propertyCode}
+                    }).then ((images)  => {
+                        return images;
+                    }).catch ((error) => {
+                        return null;
+                    });
+                    bookings[booking].dataValues.images = images;
+
+                    const properties = await Property.findOne({
+                        where: {
+                            propertyCode: bookings[booking].dataValues.propertyCode
+                        }
+                    }).then ((properties)  => {
+                        return properties;
+                    }).catch ((error) => {
+                        return null;
+                    });
+                    bookings[booking].dataValues.properties = properties;
+                }
+            }
+            return bookings
         }catch (e){
             throw new Error(e.message);
         }
