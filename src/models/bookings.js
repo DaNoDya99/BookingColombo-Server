@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     arrival_date: DataTypes.DATEONLY,
     departure_date: DataTypes.DATEONLY,
     noOfPeople: DataTypes.INTEGER,
+    bookedDate: DataTypes.DATEONLY,
     propertyCode: DataTypes.STRING,
     travellerID: DataTypes.INTEGER
   }, {

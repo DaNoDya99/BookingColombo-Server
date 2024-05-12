@@ -27,8 +27,12 @@ module.exports = {
       noOfPeople: {
         type: Sequelize.INTEGER
       },
+      bookedDate: {
+        type: Sequelize.DATEONLY,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      },
       propertyCode: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
       },
       travellerID: {
           type: Sequelize.INTEGER
