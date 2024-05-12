@@ -1,5 +1,6 @@
 const {Place, Place_image} = require("../models")
 const {generateIds} = require("../middlewares/functions");
+const { where } = require("sequelize");
 
 class PlaceService{
     async addPlace(data) {
@@ -49,22 +50,24 @@ class PlaceService{
 
     async getPlace(id) {
         try{
-            const places = await Place.findAll();
-            if(places) {
-                for(let place in places) {
-                    const images = await Place_image.findAll({
-                        where: {
-                            placeCode: places[place].dataValues.placeCode
-                        }
-                    }).then ((images)  => {
-                        return images;
-                    }).catch ((error) => {
-                        return null;
-                    });
-                    places[place].dataValues.images = images;
-                }
-            }
+            const places = await Place.findOne({where : {placeCode : id}});
+            console.log(places);
+            // if(places) {
+            //     for(let place in places) {
+            //         const images = await Place_image.findAll({
+            //             where: {
+            //                 placeCode: places[place].dataValues.placeCode
+            //             }
+            //         }).then ((images)  => {
+            //             return images;
+            //         }).catch ((error) => {
+            //             return null;
+            //         });
+            //         places[place].dataValues.images = images;
+            //     }
+            // }
             // console.log(places[0].dataValues);
+            console.log("check", places);
             return places 
         } catch (error) {
             throw new Error(error)
