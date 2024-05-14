@@ -69,22 +69,22 @@ class ReportsServices{
     async getPropertyCountsGroupedByTypeForEachCategory(owner){
         const properties = await Property.findAll({
             where: {
-                id: owner
+                propertyOwnerId: owner
             }
         });
 
         const propertyCounts = {
-            apartments: 0,
+            restaurants: 0,
             boutiques: 0,
             hotel: 0,
         }
 
         properties.forEach(property => {
             switch (property.type){
-                case 'apartment':
-                    propertyCounts.apartments++;
+                case 'restaurants':
+                    propertyCounts.restaurants++;
                     break;
-                case 'boutique':
+                case 'boutiques':
                     propertyCounts.boutiques++;
                     break;
                 case 'hotel':
@@ -124,7 +124,7 @@ class ReportsServices{
         }
 
         const revenue = {
-            apartments: 0,
+            restaurants: 0,
             boutiques: 0,
             hotel: 0,
         }
@@ -146,8 +146,8 @@ class ReportsServices{
             const revenueForBooking = daysDifference * property.price;
 
             switch (property.type){
-                case 'apartments':
-                    revenue.apartments += revenueForBooking;
+                case 'restaurants':
+                    revenue.restaurants += revenueForBooking;
                     break;
                 case 'boutiques':
                     revenue.boutiques += revenueForBooking;
