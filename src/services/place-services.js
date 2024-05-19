@@ -134,13 +134,15 @@ class PlaceService{
                 throw new Error("Place not found");
             }
 
-            const updatedPlace = await Place.update(
+            console.log(data);
+
+            return await Place.update(
                 {
                     category: data.category,
                     name: data.place,
                     description: data.description,
-                    openTime: data.opening_time+':00',
-                    closingTime: data.closing_time+':00',
+                    openTime: data.opening_time,
+                    closingTime: data.closing_time,
                     location: data.location
                 },
                 {
@@ -149,12 +151,10 @@ class PlaceService{
                     }
                 }
             ).then((updatedPlace) => {
-                return updatedPlace;
+                return true;
             }).catch((error) => {
                 return null;
             });
-
-            return updatedPlace;
         } catch (error) {
             throw new Error(error.message);
         }

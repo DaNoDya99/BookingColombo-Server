@@ -54,7 +54,8 @@ class PlaceController {
     async updatePlace(req, res) {
         try {
             const data = req.body;
-            const updatedPlace = await placeServices.updatePlace(id, data);
+            const updatedPlace = await placeServices.updatePlace(data);
+            console.log("updatedPlace",updatedPlace);
             if(updatedPlace) {
                 return res.status(200).json({status: "success", message: "Place updated successfully", data: updatedPlace});
             } else {
